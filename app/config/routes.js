@@ -5,6 +5,7 @@ import Home from '../components/Home';
 import PromptContainer from '../containers/PromptContainer'
 import ConfirmBattleContainer from '../containers/ConfirmBattleContainer'
 import ResultsContainer from '../containers/ResultsContainer'
+import QuotesContainer from '../containers/QuotesContainer'
 
 export default (
     <Route path='/' component={Main}>
@@ -13,6 +14,7 @@ export default (
       <Route path='playerTwo/:playerOne' header="Player Two" component={PromptContainer}/>
       <Route path='/battle' header="Battle" component={ConfirmBattleContainer}/>
       <Route path='/results' header="Battle" component={ResultsContainer}/>
+      <Route path='/quotes' header='quotes' component={QuotesContainer} />
     </Route>
 
 )

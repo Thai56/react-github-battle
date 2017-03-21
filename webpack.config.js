@@ -16,7 +16,7 @@ module.exports = {
   },
   module : {
     loaders : [
-      // tell webpack what kind a transofrmations it should make on our code
+      // tell webpack what kind a transformations it should make on our code
       //using .babelrc
       {test: /\.js$/, include: __dirname + '/app', loader: 'babel-loader' },
       {test: /\.css$/, loader: "style-loader!css-loader"}
