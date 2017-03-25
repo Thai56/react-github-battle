@@ -1,13 +1,13 @@
 import React from 'react';
 import axios from 'axios';
 
-function Quote(props) {
+function Quote({quote, title}) {
   return (
     <div className="quote-wrapper">
       <div style={{width:'80%', height: 400, margin: 'auto', border: '10px solid brown', padding: 16, marginBottom:60}}>
-        <h3>Quote: {props.quote}</h3>
+        <h3>Quote: {quote}</h3>
       </div>
-      <h4>Title: {props.title}</h4> <br />
+      <h4>Title: {title}</h4> <br />
     </div>
   )
 }
@@ -36,13 +36,14 @@ export default class QuotesContainer extends React.Component {
       }
     });
     return (
-      <div style={{background: 'tan', padding: 16}}>
+      <div style={{background: 'tan', padding: 16, paddingLeft:100}}>
         <h1 style={{textAlign: 'center'}}>Quotes Container</h1>
-        <h3>Current Quote {currentIndex + 1} out of {quoteArr.length}</h3>
         <div className="quotes">
+        <button style={{float:'right', marginRight: 114}}>Favorite</button>
+        <h3 style={{marginBottom: 24}}>Current Quote {currentIndex + 1} out of {quoteArr.length}</h3>
           {quote}
         </div>
-        <button onClick={() => this.setState({currentIndex:currentIndex - 1})}>Prev Quote</button>
+        <button style={{marginRight:16}}onClick={() => this.setState({currentIndex:currentIndex - 1})}>Prev Quote</button>
         <button onClick={() => this.setState({currentIndex:currentIndex + 1})}>Next Quote</button>
       </div>
     )
