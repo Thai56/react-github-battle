@@ -19,8 +19,6 @@ import {
 
 import reducer from './data/reducer';
 
-
-const initialState = Map(window.__INITIAL_STATE__);
 const store = createStore(reducer);
 ReactDOM.render(
   <Provider store={ store }>
