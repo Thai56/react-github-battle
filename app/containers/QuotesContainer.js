@@ -1,3 +1,4 @@
+import { Button } from 'react-semantic-ui';
 import React from 'react';
 import axios from 'axios';
 import { bindActionCreators } from 'redux';
@@ -52,7 +53,7 @@ class QuotesContainer extends React.PureComponent {
       <div style={{background: 'tan', padding: 16, paddingLeft:100}}>
         <h1 style={{textAlign: 'center'}}>Quotes Container</h1>
         <div className="quotes">
-        <button
+        <Button
           style={{
             float:'right',
             marginRight: 114
@@ -63,7 +64,7 @@ class QuotesContainer extends React.PureComponent {
           }}
         >
           Favorite
-        </button>
+        </Button>
 
         <h3 style={{marginBottom: 24}}>Current Quote {currentIndex + 1} out of {quoteArr.length}</h3>
           {quote}

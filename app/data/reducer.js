@@ -25,10 +25,9 @@ const updateState = (state, change) => {
 
 };
 
-const addFavorite = (change) => {
-  let currentState = (['favorites'], (arr) => {
-    arr.push(change);
-  });
+const addFavorite = (state, change) => {
+  console.log('STATEADD', state, change)
+  let currentState = state.updateIn(["favorites"], (arr) => arr.push(change));
   return currentState;
 }
 
