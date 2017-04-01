@@ -6,6 +6,7 @@ import PromptContainer from '../containers/PromptContainer'
 import ConfirmBattleContainer from '../containers/ConfirmBattleContainer'
 import ResultsContainer from '../containers/ResultsContainer'
 import QuotesContainer from '../containers/QuotesContainer'
+import FavoritesContainer from '../containers/FavoritesContainer'
 
 export default (
     <Route path='/' component={Main}>
@@ -15,6 +16,7 @@ export default (
       <Route path='/battle' header="Battle" component={ConfirmBattleContainer}/>
       <Route path='/results' header="Battle" component={ResultsContainer}/>
       <Route path='/quotes' header='quotes' component={QuotesContainer} />
+      <Route path='/favorites' header='favorites' component={FavoritesContainer} />
     </Route>
 
 )
