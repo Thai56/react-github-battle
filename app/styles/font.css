@@ -1,0 +1,25 @@
+@import url('https://fonts.googleapis.com/css?family=Anton|Gloria+Hallelujah|Macondo|Pacifico|Revalia|Spirax');
+
+.macondo {
+  font-family: 'Macondo';
+}
+
+.spirax {
+  font-family: 'Spirax';
+}
+
+.revalia {
+  font-family: 'Revalia';
+}
+
+.anton {
+  font-family: 'Anton';
+}
+
+.gloria {
+  font-family: 'Gloria+Hallelujah';
+}
+
+.pacifico {
+  font-family: 'Pacifico';
+}

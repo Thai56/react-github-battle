@@ -5,7 +5,8 @@ import axios from 'axios';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Actions } from '../data/reducer';
-
+import helper from '../utils/colorHelper';
+import '../styles/font.css';
 function Quote({quote, title}) {
   return (
     <div className="quote-wrapper">
@@ -20,7 +21,7 @@ function Quote({quote, title}) {
 class QuotesContainer extends Component {
   constructor(props){
     super(props);
-    this.state = {currentIndex: 0,quoteArr: []};
+    this.state = {currentIndex: 0,quoteArr: [],background:null};
     this.addFavorite = this.addFavorite.bind(this);
   }
 
@@ -31,13 +32,14 @@ class QuotesContainer extends Component {
     actions.addFavorite(quote);
   }
 
-  componentWillMount() {
+  componentDidMount() {
     axios.get('http://quotesondesign.com/wp-json/posts?filter[orderby]=rand&filter[posts_per_page]=20')
     .then(res => {
       console.log(res.data);
       this.setState({quoteArr: res.data});
     })
   }
+
   render() {
     const {reducer} = this.props;
     let {quoteArr, currentIndex} = this.state;
@@ -52,8 +54,8 @@ class QuotesContainer extends Component {
     });
 
     return (
-      <div style={{background: 'tan', padding: 16, paddingLeft:100}}>
-        <h1 style={{textAlign: 'center'}}>Quotes Container</h1>
+      <div style={{background: `${helper.randomColor()}`, padding: 16, paddingLeft:100}}>
+        <h1 style={{textAlign: 'center', color:`${helper.randomColor()}`}}>Quotes Container</h1>
         <div className="quotes">
         <button
           style={{
@@ -68,11 +70,30 @@ class QuotesContainer extends Component {
           Favorite
         </button>
 
-        <h3 style={{marginBottom: 24}}>Current Quote {currentIndex + 1} out of {quoteArr.length}</h3>
-          {quote}
+        <h3 style={{marginBottom: 24, color:`${helper.randomColor()}`}}>Current Quote {currentIndex + 1} out of {quoteArr.length}</h3>
+          <span className={helper.randomFont()} style={{color:`${helper.randomColor()}`}}>{quote}</span>
         </div>
-        <button style={{marginRight:16}}onClick={() => this.setState({currentIndex:currentIndex - 1})}>Prev Quote</button>
-        <button onClick={() => this.setState({ currentIndex:currentIndex + 1})}>Next Quote</button>
+        <button
+          style={{marginRight:16}}
+          disabled={currentIndex < 1}
+          onClick={() => {
+            this.setState({currentIndex:currentIndex - 1})
+            helper.randomColor();
+            helper.randomFont();
+          }}
+        >
+            Prev Quote
+        </button>
+        <button
+          disabled={currentIndex === quoteArr.length - 1}
+          onClick={() => {
+            this.setState({ currentIndex:currentIndex + 1});
+            helper.randomColor();
+            helper.randomFont();
+          }}
+        >
+          Next Quote
+        </button>
         <button onClick={() => hashHistory.push('/favorites')}>go to favorites</button>
       </div>
     )
