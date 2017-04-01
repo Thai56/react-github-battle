@@ -1,9 +1,11 @@
-import { Button } from 'react-semantic-ui';
-import React from 'react';
+import React, { Component } from 'react';
+// import {Button} from 'react-semantic-ui';
+import { hashHistory } from 'react-router';
 import axios from 'axios';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Actions } from '../data/reducer';
+
 function Quote({quote, title}) {
   return (
     <div className="quote-wrapper">
@@ -15,7 +17,7 @@ function Quote({quote, title}) {
   )
 }
 
-class QuotesContainer extends React.PureComponent {
+class QuotesContainer extends Component {
   constructor(props){
     super(props);
     this.state = {currentIndex: 0,quoteArr: []};
@@ -53,7 +55,7 @@ class QuotesContainer extends React.PureComponent {
       <div style={{background: 'tan', padding: 16, paddingLeft:100}}>
         <h1 style={{textAlign: 'center'}}>Quotes Container</h1>
         <div className="quotes">
-        <Button
+        <button
           style={{
             float:'right',
             marginRight: 114
@@ -64,13 +66,14 @@ class QuotesContainer extends React.PureComponent {
           }}
         >
           Favorite
-        </Button>
+        </button>
 
         <h3 style={{marginBottom: 24}}>Current Quote {currentIndex + 1} out of {quoteArr.length}</h3>
           {quote}
         </div>
         <button style={{marginRight:16}}onClick={() => this.setState({currentIndex:currentIndex - 1})}>Prev Quote</button>
         <button onClick={() => this.setState({ currentIndex:currentIndex + 1})}>Next Quote</button>
+        <button onClick={() => hashHistory.push('/favorites')}>go to favorites</button>
       </div>
     )
   }

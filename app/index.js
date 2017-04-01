@@ -26,6 +26,3 @@ ReactDOM.render(
   </Provider>
   ,document.getElementById('app')
 );
-
-
-// const store = createStore(reducer);
