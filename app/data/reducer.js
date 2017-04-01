@@ -2,7 +2,8 @@ import Immutable, { Map } from 'immutable';
 
 export const types = {
   UPDATE_STATE: 'UPDATE_STATE',
-  ADD_FAVORITE: 'ADD_FAVORITE'
+  ADD_FAVORITE: 'ADD_FAVORITE',
+  REMOVE_FAVORITE: 'REMOVE_FAVORITE'
 };
 
 export const Actions = {
@@ -12,6 +13,10 @@ export const Actions = {
   }),
   updateState: (change) => ({
     type: types.UPDATE_STATE,
+    change
+  }),
+  removeFavorite: (change) => ({
+    type: types.REMOVE_FAVORITE,
     change
   })
 };
@@ -31,6 +36,18 @@ const addFavorite = (state, change) => {
   return currentState;
 }
 
+const removeFavorite = (state, change) => {
+  let currentState = state.updateIn(['favorites'], (arr) => {
+    return arr.filter((fav, i) => {
+      console.log('change',change, arr, i);
+      if (i !== change){
+        return fav;
+      }
+    } ) ;
+  });
+  return currentState;
+}
+
 const initialState = Immutable.fromJS({
   favorites: []
 });
@@ -40,7 +57,9 @@ export default function(state = initialState, action) {
     case types.UPDATE_STATE:
     return updateState(state, action.change);
     case types.ADD_FAVORITE:
-    return addFavorite(state, action.change)
+    return addFavorite(state, action.change);
+    case types.REMOVE_FAVORITE:
+    return removeFavorite(state, action.change);
     default:
     return state;
   }

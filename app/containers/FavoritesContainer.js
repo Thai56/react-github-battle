@@ -3,14 +3,20 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { hashHistory } from 'react-router';
 import helper from '../utils/colorHelper';
+import { Actions } from '../data/reducer';
 Favorite.propTypes = {
   fav: React.PropTypes.object.isRequired
 }
-function Favorite({fav}){
+function Favorite({fav, actions, index}){
+  const removeFavorite = () => {
+    console.log(index,'=  =  =  =  =  =  =  =')
+    actions.removeFavorite(index)
+  };
   return (
     <div style={{border: `10px solid ${helper.randomColor()}`, background:helper.randomColor()}}>
       <h4 className={helper.randomFont()}>Author:{fav.title}</h4>
       <h4 className={helper.randomFont()}>{fav.content}</h4>
+      <button onClick={() => removeFavorite(index)}>remove from favorites</button>
     </div>
   )
 }
@@ -36,13 +42,17 @@ class FavoritesContainer extends Component {
   }
 
   favoritesGenerator() {
+    const { dispatch } = this.props;
+    const actions = bindActionCreators(Actions, dispatch);
     let { favorites } = this.state;
     if (favorites.size > 0) {
       return favorites.map( (fav, i) => {
         return (
           <Favorite
             key={ i }
+            index={ i }
             fav={ fav }
+            actions={ actions }
           />
         )
       });
@@ -50,10 +60,11 @@ class FavoritesContainer extends Component {
   }
 
   render() {
-    let { favorites } = this.state;
+    let { favorites } = this.state, favLength = favorites.length, height=600;
     console.log('FavoritesContainer', favorites);
+
     return (
-      <div style={{background: helper.randomColor()}}>
+      <div style={{background: helper.randomColor(), height:favLength > 0 ? null : 800}}>
         <button onClick={() => this.navToQuotes()}>back to quotes</button>
         {this.favoritesGenerator()}
       </div>
