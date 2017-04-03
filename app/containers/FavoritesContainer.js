@@ -41,7 +41,7 @@ class FavoritesContainer extends Component {
   }
 
   componentWillUpdate(nextProps, nextState) {
-    if(nextProps.favorites < this.props.favorites){
+    if(nextProps.favorites.size < this.props.favorites.size){
       console.log('=  =  =  =  NOT THE SAME', nextProps, nextProps.favorites, this.props, this.props.favorites);
       this.setState({favorites: nextProps.favorites});
     }
