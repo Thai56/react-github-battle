@@ -9,7 +9,6 @@ Favorite.propTypes = {
 }
 function Favorite({fav, actions, index}){
   const removeFavorite = () => {
-    console.log(index,'=  =  =  =  =  =  =  =')
     actions.removeFavorite(index)
   };
   return (
