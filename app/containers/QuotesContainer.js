@@ -7,6 +7,7 @@ import { connect } from 'react-redux';
 import { Actions } from '../data/reducer';
 import helper from '../utils/colorHelper';
 import '../styles/font.css';
+import log from './log';
 function Quote({quote, title}) {
   return (
     <div className="quote-wrapper">
@@ -104,4 +105,6 @@ const mapStateToProps = (state) => {
   return { favorites: state.get('favorites') }
 };
 
-export default connect(mapStateToProps)(QuotesContainer);
+connect(mapStateToProps)(QuotesContainer);
+
+export default log(connect(mapStateToProps)(QuotesContainer));

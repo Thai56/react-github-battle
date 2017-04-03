@@ -31,20 +31,14 @@ const updateState = (state, change) => {
 };
 
 const addFavorite = (state, change) => {
-  console.log('STATEADD', state, change)
   let currentState = state.updateIn(["favorites"], (arr) => arr.push(change));
   return currentState;
 }
 
 const removeFavorite = (state, change) => {
-  let currentState = state.updateIn(['favorites'], (arr) => {
-    return arr.filter((fav, i) => {
-      console.log('change',change, arr, i);
-      if (i !== change){
-        return fav;
-      }
-    } ) ;
-  });
+  let myArray = [];
+  let currentState = state.deleteIn(['favorites', change])
+  console.log('LOG',currentState, state.get('favorites').get(change), state.get('favorites'), change)
   return currentState;
 }
 
