@@ -37,7 +37,11 @@ const addFavorite = (state, change) => {
 
 const removeFavorite = (state, change) => {
   let myArray = [];
-  let currentState = state.deleteIn(['favorites', change])
+  let currentState = state.updateIn(["favorites"], (arr) => {
+    return arr.filter( (item, index) => {
+      return index !== change;
+    })
+  });
   console.log('LOG',currentState, state.get('favorites').get(change), state.get('favorites'), change)
   return currentState;
 }

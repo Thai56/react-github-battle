@@ -8,7 +8,7 @@ Favorite.propTypes = {
   fav: React.PropTypes.object.isRequired
 }
 function Favorite({fav, actions, index}){
-  const removeFavorite = () => {
+  const removeFavorite = (index) => {
     actions.removeFavorite(index)
   };
   return (
@@ -25,7 +25,7 @@ class FavoritesContainer extends Component {
     super(props);
 
     this.state = {
-      favorites: null
+      favorites: []
     }
     this.navToQuotes = this.navToQuotes.bind(this);
     this.favoritesGenerator = this.favoritesGenerator.bind(this);
@@ -35,9 +35,16 @@ class FavoritesContainer extends Component {
     hashHistory.push('/quotes');
   }
 
-  componentWillMount() {
+  componentDidMount() {
     const { favorites } = this.props;
     this.setState({favorites: favorites});
+  }
+
+  componentWillUpdate(nextProps, nextState) {
+    if(nextProps.favorites < this.props.favorites){
+      console.log('=  =  =  =  NOT THE SAME', nextProps, nextProps.favorites, this.props, this.props.favorites);
+      this.setState({favorites: nextProps.favorites});
+    }
   }
 
   favoritesGenerator() {
@@ -59,11 +66,11 @@ class FavoritesContainer extends Component {
   }
 
   render() {
-    let { favorites } = this.state, favLength = favorites.length, height=600;
+    let { favorites } = this.state, height=600;
     console.log('FavoritesContainer', favorites);
 
     return (
-      <div style={{background: helper.randomColor(), height:favLength > 0 ? null : 800}}>
+      <div style={{background: helper.randomColor()}}>
         <button onClick={() => this.navToQuotes()}>back to quotes</button>
         {this.favoritesGenerator()}
       </div>
